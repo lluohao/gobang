@@ -1,0 +1,40 @@
+.btn{
+	border: 0px;
+	height: 40px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.btn-success{
+	background: #52BF52;
+	color: #FFF;
+}
+.btn-success:hover{
+	background:#6CCE6C ;
+}
+
+
+.btn-primary{
+	background: #3EA4CC;
+	color: #FFF;
+}
+.btn-primary:hover{
+	background:#71BCDA ;
+}
+
+
+.btn-warning{
+	background: #D55243;
+	color: #FFF;
+}
+.btn-warning:hover{
+	background:#D87261 ;
+}
+
+.btn-block{
+	display: block;
+	width: 100%;
+}
+
+.btn-lg{
+	width: 300px;
+}
