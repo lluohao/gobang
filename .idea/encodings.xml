@@ -2,9 +2,20 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/dao/EntityDao.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/dao/MailSernder.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/filter/CharsetFilter.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/image/GaussImageNoise.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/image/ImageNoise.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/image/VerificationImage.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/mail/MailSernder.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/net/AutoInitialization.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/net/CompleteInitializationHttpServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/net/InitializationHttpServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/net/SpringServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/service/IUserService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/service/IVerificationCodeService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/service/impl/VerificationCodeServiceImpl.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/servlet/UserServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/servlet/VerificationCodeServlet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/test/UserServiceTest.java" charset="GBK" />
   </component>
 </project>

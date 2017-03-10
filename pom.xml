@@ -25,9 +25,15 @@
     </build>
     <properties>
         <!--<org.springframework.version>3.2.8.RELEASE</org.springframework.version>-->
-         <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
+         <org.springframework.version>4.1.2.RELEASE</org.springframework.version>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
         <!-- javax.mail -->
         <dependency>
             <groupId>javax.mail</groupId>
@@ -39,7 +45,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <!-- spring的持久层依赖 -->
         <dependency>
