@@ -4,7 +4,6 @@
 
 	<head>
 		<meta charset="UTF-8">
-
 		<title>五子棋对战-登录</title>
 		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 		<script type="text/javascript" src="js/user.js"></script>

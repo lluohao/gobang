@@ -1,6 +1,5 @@
 package com.llhao.gobang.util;
 
-
 /**
  * @author ÂÞºÆ
  * 
@@ -30,5 +29,14 @@ public class StringUtils {
 
 	public static String randString(int length) {
 		return randString(length, BASE_WORD);
+	}
+
+	public static int realLength(String text) {
+		int len = text.getBytes().length;
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(0);
+			len += c >= 'A' && c <= 'Z' ? 1 : 0;
+		}
+		return len;
 	}
 }
