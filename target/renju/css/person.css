@@ -1,0 +1,35 @@
+#head-img{
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+#head-img img{
+	border-radius: 100px;
+	width: 100px;
+	height: 100px;
+}
+#sign{
+	float: right;
+	width: 900px;
+	height: 100px;
+	position: relative;
+}
+#sign p{
+	font-size: 20px;
+	padding-left: 20px;
+}
+#top{
+	margin-top:50px ;
+	overflow: hidden;
+}
+body{
+}
+#screen{
+	width: 1000px;
+	margin: auto;
+}
+#line{
+	height: 1px;
+	background: #989;
+	margin: 10px 0px;
+}
