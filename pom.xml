@@ -7,6 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <name>renju Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <org.springframework.version>4.0.5.RELEASE</org.springframework.version>
+    </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -14,13 +17,45 @@
             <artifactId>junit</artifactId>
             <version>4.8.1</version>
         </dependency>
-
-
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
+        </dependency>
+        <!-- spring的依赖包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- spring的持久层依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <!-- springMVC依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.30</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.2</version>
         </dependency>
 
     </dependencies>
@@ -38,53 +73,6 @@
                     </webAppConfig>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.2.4</version>
-                <configuration>
-                    <container>
-                        <containerId>jetty8x</containerId>
-                        <home>/Users/llhao/software/jetty</home>
-                    </container>
-                    <configuration>
-                        <type>standalone</type>
-                        <home>/Users/llhao/software/temp-jetty</home>
-                        <properties>
-                            <cargo.servlet.port>8080</cargo.servlet.port>
-                        </properties>
-                    </configuration>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <activation>
-                <property>
-                    <name>key</name>
-                    <value>value</value>
-                </property>
-            </activation>
-            <id>dev</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/profile/dev</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <profile>
-            <id>test</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/profile/test</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 </project>
