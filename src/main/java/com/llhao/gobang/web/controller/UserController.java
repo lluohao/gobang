@@ -1,4 +1,4 @@
-package com.llhao.gobang.controller;
+package com.llhao.gobang.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
