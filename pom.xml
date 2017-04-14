@@ -28,7 +28,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <!-- spring的持久层依赖 -->
         <dependency>
