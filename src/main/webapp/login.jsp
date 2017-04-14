@@ -14,7 +14,7 @@
 
 	<body>
 		<div id="screen" class="center">
-			<form action="user" method="post" onsubmit="return login()">
+			<form action="login" method="post" onsubmit="return login()">
 				<input type="hidden" name="method" value="login" />
 				<div>
 					<p style="text-align: center;font-size: 25px;color:#555">GOBENG-LOGIN</p>
