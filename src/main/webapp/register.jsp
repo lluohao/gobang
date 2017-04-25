@@ -13,7 +13,7 @@
 
 	<body>
 		<div id="screen" class="center">
-			<form action="user" method="post" onsubmit="return register()">
+			<form action="register" method="post" onsubmit="return register()">
 				<input type="hidden" name="method" value="register" />
 				<div class="input-primay">
 					<input type="text" placeholder="请在此处输入用户名" name="name" id="name" value="${name}" />
