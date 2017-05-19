@@ -30,7 +30,7 @@
 				<div class="input-primay">
 					<input type="text" placeholder="请输入邮箱地址" name="email" id="email" value="${email}" />
 				</div>
-				<div class="input-primay">
+				<div class="input-primay" style="display: none;">
 					<input type="text" placeholder="请在此处输入图形验证码" onfocus="loadFirstImage()" name="code" id="code" />
 				</div>
 				<div style="text-align: center;cursor: pointer;">

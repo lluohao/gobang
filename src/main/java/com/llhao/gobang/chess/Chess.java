@@ -28,13 +28,11 @@ public class Chess {
     }
 
     public boolean play(int x, int y, int type) {
-        //����ԭʼ����
         resetHashCode(x,y,type);
         square[y][x] = type;
         if(type==0){
             back();
         }else {
-            //��Ӳ���
             ChessNode node = new ChessNode();
             node.setX(x);
             node.setY(y);

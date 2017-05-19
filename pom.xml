@@ -117,6 +117,16 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <!-- 修改webapp目录为WebContent -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!-- 设置WebContent目录为Web目录 -->
+                    <webappDirectory>src/main/webapp</webappDirectory>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>

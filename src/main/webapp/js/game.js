@@ -6,6 +6,10 @@ var data;
 var mt;
 var ml;
 var currentType=1;
+var me = 1;
+var com = -1;
+var deep = 4;
+var now = -1;
 function init(id) {
 	can = document.getElementById(id);
 	mt = can.offsetTop;
@@ -34,7 +38,18 @@ function life() {
 }
 $(document).ready(main);
 
-function main() {
+function main(){
+	init("screen");
+}
+
+function initFirst(){
+	me = $("#first").val();
+	me = parseInt(me);
+	com = -me;
+}
+
+function newgame() {
+	initFirst();
 	var data1 = [
 		 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -52,18 +67,24 @@ function main() {
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	];
-	init("screen");
-	next(data1,-1,4);
 	for(var i = 0;i<data1.length;i++){
 		for(var j = 0;j<data1[i].length;j++){
-			if(data[i][j]!=1){
-				play(j,i,data1[i][j]);
-			}
+			play(j,i,data1[i][j]);
 		}
+	}
+	getNext();
+}
+
+function getNext(){
+	if(now==com){
+		next(data,com,deep);
 	}
 }
 
 function onPlay(e) {
+	if(now==com){
+		return;
+	}
 	var x = e.clientX - ml;
 	var y = e.clientY - mt;
 	x = Math.floor((x - paddingx + 20) / 40);
@@ -72,9 +93,10 @@ function onPlay(e) {
 	if(d!=undefined&&d!=0){
 		return;
 	}
-	play(x, y, currentType);
+	play(x, y, now);
 	console.log(y+","+x)
-	currentType = -currentType;
+	now = com;
+	getNext();
 }
 
 function paintBoard() {
@@ -137,8 +159,13 @@ function next(data,type,deep){
 	var result = $.ajax({
 		type:"get",
 		url:"next?chessStr="+s+"&type="+type+"&deep="+deep,
-		async:false
+		async:true,
+		success:function(e){
+			var resultView = eval(e);
+			console.log(resultView)
+			play(resultView.x, resultView.y, type);
+			now = -now;
+		}
 	});
-	var resultView = eval(result);
-	data[resultView.y][resultView.x] = type;
+	
 }

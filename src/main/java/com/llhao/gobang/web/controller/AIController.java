@@ -16,7 +16,7 @@ public class AIController {
     @Autowired
     private IAiService service;
     @RequestMapping("/next")
-    public @ResponseBody AIResultView next(@RequestParam String chessStr,int type,int deep){
-        return service.next(chessStr,type,deep);
+    public @ResponseBody AIResultView next(int type,int deep){
+        return service.next(null,type,deep);
     }
 }

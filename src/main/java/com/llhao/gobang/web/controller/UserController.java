@@ -20,15 +20,15 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login(@RequestParam String name, @RequestParam String password, Model model, HttpSession session) {
-        model.addAttribute("message", "ç™»å½•å¤±è´¥ï¼");
+        model.addAttribute("message", "µÇÂ¼Ê§°Ü");
         try {
             User user = userService.login(name, password);
             if (user == null) {
-                model.addAttribute("message", "ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯");
+                model.addAttribute("message", "ÓÃ»§Ãû»òÕßÃÜÂë´íÎó");
                 return "login";
             } else {
                 session.setAttribute("user", user);
-                model.addAttribute("message", "ç™»å½•æˆåŠŸï¼Œæ­£åœ¨è·³è½¬......");
+                model.addAttribute("message", "µÇÂ¼³É¹¦£¬ÕıÔÚÌø×ª");
                 model.addAttribute("url", "index.jsp");
                 return "jump";
             }
@@ -46,7 +46,7 @@ public class UserController {
             model.addAttribute("message", e.getMessage());
             return "register";
         }
-        model.addAttribute("message", "æ³¨å†ŒæˆåŠŸï¼Œæ­£åœ¨è·³è½¬");
+        model.addAttribute("message", "×¢²á³É¹¦");
         model.addAttribute("url", "login.jsp");
         return "jump";
     }

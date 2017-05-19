@@ -1,0 +1,23 @@
+#main{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+}
+#screen{
+	display: inline-block;
+}
+#menu{
+	width: 300px;
+	background-color:#19931F;
+	height: 700px;
+	display: inline-block;
+}
+#menu-bottom{
+	padding: 10px;
+	display: none;
+}
+select{
+	height: 35px;
+	width: 200px;
+}
