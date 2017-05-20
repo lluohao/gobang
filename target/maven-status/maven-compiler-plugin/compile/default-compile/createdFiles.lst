@@ -12,6 +12,7 @@ com\llhao\gobang\web\controller\UserController.class
 com\llhao\gobang\test\Test.class
 com\llhao\gobang\service\IUserService.class
 com\llhao\gobang\service\po\Game$1.class
+com\llhao\gobang\web\vo\BasicView.class
 com\llhao\gobang\test\DebugFrame.class
 com\llhao\gobang\web\controller\AIController.class
 com\llhao\gobang\ai\eval\DynamicEvaluation.class
@@ -45,11 +46,13 @@ com\llhao\gobang\service\IGameService.class
 com\llhao\gobang\util\StringUtils.class
 com\llhao\gobang\ai\record\MapRecord.class
 com\llhao\gobang\ai\interceptor\WorthInterceptor.class
+com\llhao\gobang\web\vo\PlayChessView.class
 com\llhao\gobang\ai\eval\Evaluation.class
 com\llhao\gobang\ai\sort\ThreatSorter.class
 com\llhao\gobang\web\vo\AIResultView.class
 com\llhao\gobang\ai\record\ZobristRecord.class
 com\llhao\gobang\ai\interceptor\PositionInterceptor.class
 com\llhao\gobang\ai\MinmaxAI.class
+com\llhao\gobang\web\vo\NewGameView.class
 com\llhao\gobang\ai\sort\SimpleMatrixSorter.class
 com\llhao\gobang\service\impl\UserServiceImpl.class

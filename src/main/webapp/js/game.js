@@ -10,6 +10,7 @@ var me = 1;
 var com = -1;
 var deep = 4;
 var now = -1;
+var step = 0;
 function init(id) {
 	can = document.getElementById(id);
 	mt = can.offsetTop;
@@ -29,6 +30,23 @@ function init(id) {
 
 function play(x, y, type) {
 	data[y][x] = type;
+	if(type!=0){
+		step++;
+	}
+}
+
+function playToNetWork(x, y, type){
+	$.ajax({
+		type:"get",
+		url:"play?x="+x+"&y="+y+"&type="+type,
+		async:true,
+		success:function(e){
+			console.log(e.code+":"+e.message);
+			if(e.code==200){
+				now=com;
+			}
+		}
+	});
 }
 
 function life() {
@@ -46,6 +64,8 @@ function initFirst(){
 	me = $("#first").val();
 	me = parseInt(me);
 	com = -me;
+	deep = $("#diff").val();
+	deep = parseInt(deep);
 }
 
 function newgame() {
@@ -67,17 +87,38 @@ function newgame() {
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	];
+	
+	var s = "";
+	for (var i = 0; i < data1.length; i++) {
+		for (var j = 0; j < data1[i].length; j++) {
+			s+=data1[i][j]==0?"0":data1[i][j]==1?"B":"W";
+		}
+	}
+	$.ajax({
+		type:"get",
+		url:"newComputer?type="+me+"&diff="+deep+"&str="+s,
+		async:true,
+		success:function(e){
+			var obj = eval(e);
+			console.log(obj.message);
+		}
+	});
 	for(var i = 0;i<data1.length;i++){
 		for(var j = 0;j<data1[i].length;j++){
 			play(j,i,data1[i][j]);
 		}
 	}
-	getNext();
+	circle();
+	console.log("finish init")
+}
+
+function circle(){
+	setInterval(getNext,500);
 }
 
 function getNext(){
 	if(now==com){
-		next(data,com,deep);
+		next();
 	}
 }
 
@@ -95,6 +136,7 @@ function onPlay(e) {
 	}
 	play(x, y, now);
 	console.log(y+","+x)
+	playToNetWork(x, y, now);
 	now = com;
 	getNext();
 }
@@ -150,21 +192,18 @@ function line(sx, sy, ex, ey) {
 }
 
 function next(data,type,deep){
-	var s = "";
-	for (var i = 0; i < data.length; i++) {
-		for (var j = 0; j < data[i].length; j++) {
-			s+=data[i][j]==0?"0":data[i][j]==1?"B":"W";
-		}
-	}
 	var result = $.ajax({
 		type:"get",
-		url:"next?chessStr="+s+"&type="+type+"&deep="+deep,
+		url:"step?step="+(step+1)+"&t="+(Math.floor(Math.random()*100000)),
 		async:true,
 		success:function(e){
 			var resultView = eval(e);
-			console.log(resultView)
-			play(resultView.x, resultView.y, type);
-			now = -now;
+			//console.log(resultView.code+"："+resultView.x+","+resultView.y);
+			if(resultView.code==200){
+				console.log("load the next:"+resultView.x+","+resultView.y);
+				play(resultView.x,resultView.y,now);
+				now=-now;
+			}
 		}
 	});
 	

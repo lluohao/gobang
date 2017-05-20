@@ -48,7 +48,7 @@ public class Test {
             if(i%2==0){
                 next = ai.next(chess, -1, 4);
                 chess.play(next.getX(), next.getY(), -1);
-                System.out.println("±¾´ÎËÑË÷ÓÃÊ±£º"+(System.currentTimeMillis()-start)+"ºÁÃë"+",ËÑË÷½Yüc”µ£º"+ ResultNodeUtils.countChildren(next.getParent())+",ÖÃ»»±í¼ÓËÙ£º"+ZobristRecord.count);
+                System.out.println("æœ¬æ¬¡æœç´¢ç”¨æ—¶ï¼š"+(System.currentTimeMillis()-start)+"æ¯«ç§’"+",æœç´¢çµé»æ•¸ï¼š"+ ResultNodeUtils.countChildren(next.getParent())+",ç½®æ¢è¡¨åŠ é€Ÿï¼š"+ZobristRecord.count);
                 ResultNode temp = next;
                 while (temp.getNext()!=null){
                     temp = temp.getNext();
@@ -57,7 +57,7 @@ public class Test {
             }else{
                 next = ai.next(chess, 1, 4);
                 chess.play(next.getX(), next.getY(), 1);
-                System.out.println(next.getX() + "," + next.getY() + "," + next.getScore()+",ËÑË÷½ÚµãÊı£º"+ ResultNodeUtils.countChildren(next.getParent()));
+                System.out.println(next.getX() + "," + next.getY() + "," + next.getScore()+",æœç´¢èŠ‚ç‚¹æ•°ï¼š"+ ResultNodeUtils.countChildren(next.getParent()));
             }
             ResultNode temp = next;
             while (temp.getNext()!=null){

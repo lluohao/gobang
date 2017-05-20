@@ -11,4 +11,6 @@ public interface IUserService {
     boolean checkName(String name);
 
     User login(String name, String password);
+
+    User findById(int id);
 }

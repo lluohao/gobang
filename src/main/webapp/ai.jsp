@@ -27,7 +27,7 @@
 				<button class="btn btn-primary" style="width: 200px;">棋谱</button>
 			</div>
 			<div id="newgame">
-				<select id="type">
+				<select id="diff">
 					<option value="2">初级</option>
 					<option value="3">中级</option>
 					<option value="4">高级</option>

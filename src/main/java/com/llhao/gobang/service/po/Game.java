@@ -6,6 +6,7 @@ import com.llhao.gobang.ai.eval.DynamicEvaluation;
 import com.llhao.gobang.chess.ChessNode;
 import com.llhao.gobang.chess.DynamicChess;
 import com.llhao.gobang.entity.User;
+import com.llhao.gobang.utils.Matrixs;
 
 import java.sql.Timestamp;
 import java.util.concurrent.ExecutorService;
@@ -25,6 +26,13 @@ public class Game {
     private ExecutorService threadPool = Executors.newCachedThreadPool();
     private static DynamicEvaluation evaluation = new DynamicEvaluation();
     private static MinmaxAI ai = new MinmaxAI();
+
+    public void init(){
+        if(getUser(now).getId()<0){
+            computerNext();
+        }
+    }
+
     public boolean play(int x,int y,int type){
         if(win!=0){
             throw new RuntimeException("游戏已经结束,"+(win==1?"黑色方":"白色方")+"胜");
@@ -54,6 +62,8 @@ public class Game {
                 int deep = -user.getId();
                 ResultNode result = ai.next(chess,now,deep);
                 chess.play(result.getX(),result.getY(),now);
+                System.out.println("COMPLAY"+deep+":"+result.getX()+","+result.getY());
+                Matrixs.print(chess.getSquare());
                 now = -now;
             }
         });
@@ -68,7 +78,7 @@ public class Game {
         }
     }
 
-    private User getUser(int type){
+    public User getUser(int type){
         return type==1?getBlack():getWhite();
     }
 

@@ -1,7 +1,7 @@
 package com.llhao.gobang.web.vo;
 
 /**
- * Created by Everthing-- on 2017/5/19.
+ * Created by luohao on 2017/5/19.
  */
 public class ChessResultView {
     private int x;
@@ -48,5 +48,16 @@ public class ChessResultView {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "ChessResultView{" +
+                "x=" + x +
+                ", y=" + y +
+                ", code=" + code +
+                ", win=" + win +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

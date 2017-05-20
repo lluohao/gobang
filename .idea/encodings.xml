@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/test/DebugFrame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/test/Test.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/utils/FileCodeUtiles.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/llhao/gobang/web/controller/UserController.java" charset="GBK" />
   </component>

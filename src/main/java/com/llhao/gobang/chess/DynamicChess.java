@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 
 /**
- * Created by Everthing-- on 2017/5/4.
+ * Created by luohao on 2017/5/4.
  */
 public class DynamicChess extends Chess {
     private int[][] shapLine = new int[15][15];
@@ -112,6 +112,10 @@ public class DynamicChess extends Chess {
     }
 
     public static DynamicChess fromDate(String str,DynamicEvaluation evaluation){
+        if(str==null||str.length()!=225){
+            System.out.println(str+":"+str.length());
+            return new DynamicChess(evaluation);
+        }
         int[][] data = new int[15][15];
         ByteArrayInputStream bis = new ByteArrayInputStream(str.getBytes());
         for(int i = 0;i<15*15;i++){

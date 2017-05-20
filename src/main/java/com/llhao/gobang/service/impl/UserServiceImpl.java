@@ -66,4 +66,8 @@ public class UserServiceImpl implements IUserService {
         }
         return null;
     }
+
+    public User findById(int id){
+        return userDao.findUserById(id);
+    }
 }
