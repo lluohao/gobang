@@ -21,6 +21,10 @@ public class DynamicChess extends Chess {
         this.evaluation = evaluation;
     }
 
+    public DynamicChess(){
+        this(DynamicEvaluation.evaluation);
+    }
+
     public boolean play(int x, int y, int type){
         super.play(x,y,type);
         update(x,y);

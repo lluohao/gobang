@@ -1,6 +1,7 @@
 package com.llhao.gobang.service.impl;
 
 import com.llhao.gobang.chess.ChessNode;
+import com.llhao.gobang.chess.DynamicChess;
 import com.llhao.gobang.entity.User;
 import com.llhao.gobang.service.IGameService;
 import com.llhao.gobang.service.po.Game;
@@ -9,6 +10,7 @@ import com.llhao.gobang.web.vo.GameStatusView;
 import com.llhao.gobang.web.vo.PlayChessView;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -22,8 +24,48 @@ public class GameServiceImpl implements IGameService {
     public static final int STATUS_POOL = 1;
     public static final int STATUS_GAME = 2;
     public static final int STATUS_NONE = 3;
-    private static List<User> pools = new Vector<>();
-    private static Map<User,Game> games = new ConcurrentHashMap<>();
+    public static List<User> pools = new Vector<>();
+    public static Map<User,Game> games = new ConcurrentHashMap<>();
+    private Thread thread = new Thread();
+
+    public GameServiceImpl(){
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    synchronized (pools) {
+                        while (pools.size() >= 2) {
+                            System.out.println(pools.size());
+                            User u1 = pools.remove(0);
+                            User u2 = pools.remove(0);
+                            Game game = new Game();
+                            game.setNow(1);
+                            game.setBlack(u1);
+                            game.setWhite(u2);
+                            game.setTime(new Timestamp(System.currentTimeMillis()));
+                            game.setChess(new DynamicChess());
+                            games.put(u1, game);
+                            games.put(u2, game);
+                        }
+                    }
+                    handleGames();
+                    try {
+                        Thread.sleep(1000);
+                    }catch (Exception e){
+                    }
+
+                }
+            }
+
+            public void handleGames(){
+                //取出所有Game,判断是否结束
+                //如果结束，保存游戏，将用户状态重置为仅登录
+                //再判断是否长时间未连接，如果是，则认定最后一个连接的人胜
+            }
+        };
+        thread = new Thread(run);
+        thread.start();
+    }
     @Override
     public ChessResultView step(Game game, int index) {
         ChessResultView view = new ChessResultView();
@@ -72,6 +114,7 @@ public class GameServiceImpl implements IGameService {
         if(user==null){
             gsv.setCode(404);
             gsv.setMessage("please login first");
+            return gsv;
         }
         pools.add(user);
         gsv.setCode(200);
@@ -95,9 +138,12 @@ public class GameServiceImpl implements IGameService {
             return view;
         }
         if(games.get(user)!=null){
+            Game game = games.get(user);
             view.setStatus(STATUS_GAME);
             view.setCode(200);
+            view.setType(game.getBlack()==user?1:-1);
             view.setMessage("you are playing now!");
+            return view;
         }
         view.setCode(200);
         view.setStatus(STATUS_NONE);

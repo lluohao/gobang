@@ -27,6 +27,7 @@ com\llhao\gobang\test\Test$1.class
 com\llhao\gobang\web\controller\GameConrtoller.class
 com\llhao\gobang\ai\eval\finder\SimpleFinder.class
 com\llhao\gobang\web\controller\JspController.class
+com\llhao\gobang\web\vo\GameStatusView.class
 com\llhao\gobang\ai\util\ResultNodeUtils.class
 com\llhao\gobang\ai\interceptor\SimpleDateInterceptor.class
 com\llhao\gobang\dao\Test.class
@@ -46,6 +47,7 @@ com\llhao\gobang\service\IGameService.class
 com\llhao\gobang\util\StringUtils.class
 com\llhao\gobang\ai\record\MapRecord.class
 com\llhao\gobang\ai\interceptor\WorthInterceptor.class
+com\llhao\gobang\service\impl\GameServiceImpl$1.class
 com\llhao\gobang\web\vo\PlayChessView.class
 com\llhao\gobang\ai\eval\Evaluation.class
 com\llhao\gobang\ai\sort\ThreatSorter.class

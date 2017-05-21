@@ -10,6 +10,7 @@ import java.util.Arrays;
  * Created by llhao on 2017/4/26.
  */
 public class DynamicEvaluation extends MatrixEvaluation {
+    public static DynamicEvaluation evaluation = new DynamicEvaluation();
 
     private boolean attack = true;
     public void setAttack(boolean attack) {

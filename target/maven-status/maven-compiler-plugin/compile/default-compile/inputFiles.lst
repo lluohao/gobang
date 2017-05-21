@@ -20,6 +20,7 @@ E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\web\vo\BasicView.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\service\IAiService.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\web\controller\AIController.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\ai\record\MapRecord.java
+E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\web\vo\GameStatusView.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\chess\Chess.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\dao\IUserDao.java
 E:\毕业设计\代码\all\src\main\java\com\llhao\gobang\service\impl\AiServiceImpl.java

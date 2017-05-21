@@ -29,40 +29,6 @@
 					<li>历史记录</li>
 				</a>
 			</ul>
-			<ul>
-				<a href="#"> <c:if test="${empty name}">
-							登录
-						</c:if> <c:if test="${!empty name}">
-							${name}
-						</c:if>
-				</a>
-			</ul>
-		</div>
-		<div id="content">
-			<div id="fast">
-				<div id="fast-left">
-					<span>快速开始>>></span>
-				</div>
-				<div id="fast-right">
-					<button class="btn btn-primary"
-						style="width: 200px;margin-left: 50px;">匹配模式</button>
-					<button class="btn btn-primary" style="width: 200px;">人机对战</button>
-					<button class="btn btn-primary" style="width: 200px;">创建房间</button>
-					<button class="btn btn-primary" style="width: 200px;">加入房间</button>
-				</div>
-			</div>
-			<div id="room">
-				<div class="room-item">
-					<div class="user-0">
-						<img src="img/1370nz.jpg" />
-					</div>
-					<div class="desktop"></div>
-					<div class="user-1">
-						<img src="img/1370nz.jpg" />
-					</div>
-				</div>
-
-			</div>
 		</div>
 	</div>
 </body>
