@@ -100,4 +100,7 @@ public class ResultNode {
             return this.getParent()+" --> ("+x+","+y+","+score+")";
         }
     }
+    public boolean isPoint(int x, int y){
+        return this.x==x&&this.y==y;
+    }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llhao.gobang.dao.IRecordDao">
+    <insert id="insertRecord" parameterType="Record" >
+        <selectKey keyProperty="rid" order="AFTER" resultType="int">
+            SELECT MAX(rid) FROM RECORD
+        </selectKey>
+        INSERT INTO RECORD(rid,black,white,rwin,rtime,path) VALUES(NULL ,#{black},#{white},#{rwin},#{rtime},#{data})
+    </insert>
+    <select id="userRecord" parameterType="int" resultType="Record">
+        SELECT * FROM RECORD WHERE BLACK=#{id} OR WHITE=#{id}
+    </select>
+</mapper>

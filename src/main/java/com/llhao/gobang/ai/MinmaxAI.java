@@ -5,7 +5,6 @@ import com.llhao.gobang.ai.interceptor.AlphaInterceptor;
 import com.llhao.gobang.ai.interceptor.Interceptor;
 import com.llhao.gobang.ai.interceptor.PositionInterceptor;
 import com.llhao.gobang.ai.interceptor.SimpleDateInterceptor;
-import com.llhao.gobang.ai.record.Record;
 import com.llhao.gobang.ai.record.ZobristRecord;
 import com.llhao.gobang.ai.sort.Sorter;
 import com.llhao.gobang.ai.sort.ThreatSorter;
@@ -13,7 +12,6 @@ import com.llhao.gobang.ai.util.ResultNodeUtils;
 import com.llhao.gobang.chess.Chess;
 import com.llhao.gobang.chess.Point;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class MinmaxAI implements AI {
     private DynamicEvaluation evaluation = new DynamicEvaluation();//估值
     private List<Interceptor> interceptors = new ArrayList<>();//过滤器
     private Sorter sorter = new ThreatSorter();//排序
-    private Record record = new ZobristRecord();
+    //private Record record = new ZobristRecord();
     public MinmaxAI() {
         interceptors.add(new SimpleDateInterceptor());
         //interceptors.add(new TimeInterceptor(6000));
@@ -48,9 +46,6 @@ public class MinmaxAI implements AI {
         return sorter;
     }
 
-    public Record getRecord() {
-        return record;
-    }
 
     public long getStart() {
         return start;
@@ -58,6 +53,10 @@ public class MinmaxAI implements AI {
     private long start = System.currentTimeMillis();
     private void countNode(ResultNode base, int type, int deep) {
         //System.out.println(base);
+        if(deep==2){
+            if(base.isPoint(6,3)){
+            }
+        }
         if (deep == 0) {
 //            if(System.currentTimeMillis()-start>100){
 //                ResultNode temp = base;
@@ -68,7 +67,7 @@ public class MinmaxAI implements AI {
 //                start=System.currentTimeMillis();
 //            }
             base.setScore(evaluation.eval(base.getChess(), type, -base.getType()));
-            record.addNode(base.getChess(),base.getScore());
+            //record.addNode(base.getChess(),base.getScore());
         } else {
             //计算此节点的子节点的评价值
             countChildren(base, type, deep);
@@ -101,10 +100,10 @@ public class MinmaxAI implements AI {
                 node.setParent(base);
                 node.setChess(chess);
                 node.setType(-base.getType());
-                Integer re = record.find(node);
+                Integer re = null;//record.find(node);
                 if(re==null) {
                     countNode(node, type, deep - 1);
-                    record.addNode(chess,node.getScore());
+                    //record.addNode(chess,node.getScore());
                     //System.out.println("ADD:"+node+"::::"+node.getChess().hashCode());
                 }else{
                     ZobristRecord.count++;

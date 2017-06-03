@@ -2,11 +2,14 @@ package com.llhao.gobang.web.controller;
 
 import com.llhao.gobang.entity.User;
 import com.llhao.gobang.service.IUserService;
+import com.llhao.gobang.service.po.Game;
+import com.llhao.gobang.web.vo.UserInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,15 +23,15 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login(@RequestParam String name, @RequestParam String password, Model model, HttpSession session) {
-        model.addAttribute("message", "µÇÂ¼Ê§°Ü");
+        model.addAttribute("message", "ç™»å½•å¤±è´¥");
         try {
             User user = userService.login(name, password);
             if (user == null) {
-                model.addAttribute("message", "ÓÃ»§Ãû»òÕßÃÜÂë´íÎó");
+                model.addAttribute("message", "ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯");
                 return "login";
             } else {
                 session.setAttribute("user", user);
-                model.addAttribute("message", "µÇÂ¼³É¹¦£¬ÕıÔÚÌø×ª");
+                model.addAttribute("message", "ç™»å½•æˆåŠŸï¼Œæ­£åœ¨è·³è½¬");
                 model.addAttribute("url", "index.jsp");
                 return "jump";
             }
@@ -46,8 +49,47 @@ public class UserController {
             model.addAttribute("message", e.getMessage());
             return "register";
         }
-        model.addAttribute("message", "×¢²á³É¹¦");
+        model.addAttribute("message", "æ³¨å†ŒæˆåŠŸ");
         model.addAttribute("url", "login.jsp");
         return "jump";
+    }
+
+    @RequestMapping("/myInfo")
+    public @ResponseBody UserInfoView myInfo(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        UserInfoView view = new UserInfoView();
+        if(user==null){
+            view.setCode(404);
+            view.setMessage("please login first");
+        }else{
+            user = userService.findById(user.getId());
+            view.setCode(200);
+            view.setName(user.getName());
+            view.setSum(user.getLose()+user.getWin()+user.getTie());
+            view.setWin(user.getWin());
+            view.setLose(user.getLose());
+            view.setTie(user.getTie());
+        }
+        return view;
+    }
+
+    @RequestMapping("/opponentInfo")
+    public @ResponseBody UserInfoView opponentInfo(HttpSession session){
+        Game game = (Game) session.getAttribute("game");
+        UserInfoView view = new UserInfoView();
+        User me = (User) session.getAttribute("user");
+        if(game==null){
+            view.setCode(404);
+            view.setMessage("ä¸åœ¨æ¸¸æˆä¸­");
+        }else{
+            User user = game.getBlack()==me?game.getWhite():game.getBlack();
+            view.setCode(200);
+            view.setName(user.getName());
+            view.setSum(user.getLose()+user.getWin()+user.getTie());
+            view.setWin(user.getWin());
+            view.setLose(user.getLose());
+            view.setTie(user.getTie());
+        }
+        return view;
     }
 }

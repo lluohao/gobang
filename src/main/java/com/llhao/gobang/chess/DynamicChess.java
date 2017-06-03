@@ -153,19 +153,5 @@ public class DynamicChess extends Chess {
         evaluation.count(chess,mycount,otcount,1);
         System.err.println(Arrays.toString(mycount));
         System.out.println(Arrays.toString(otcount));
-//        System.out.println("*\t0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t");
-//        Matrixs.print(chess.getSquare());
-//        System.out.println();
-//        System.out.println("*\t0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t");
-//        Matrixs.print(chess.shapLine);
-//        System.out.println();
-//        System.out.println("*\t0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t");
-//        Matrixs.print(chess.shapRow);
-//        System.out.println();
-//        System.out.println("*\t0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t");
-//        Matrixs.print(chess.shapLeft);
-//        System.out.println();
-//        System.out.println("*\t0\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t");
-//        Matrixs.print(chess.shapRight);
     }
 }

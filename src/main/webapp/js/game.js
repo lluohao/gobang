@@ -41,7 +41,7 @@ function playToNetWork(x, y, type){
 		url:"play?x="+x+"&y="+y+"&type="+type,
 		async:true,
 		success:function(e){
-			console.log(e.code+":"+e.message);
+			log(e.code+":"+e.message);
 			if(e.code==200){
 				now=com;
 			}
@@ -58,6 +58,7 @@ $(document).ready(main);
 
 function main(){
 	init("screen");
+	loadUserMesg();
 }
 
 function initFirst(){
@@ -76,9 +77,9 @@ function newgame() {
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -100,7 +101,8 @@ function newgame() {
 		async:true,
 		success:function(e){
 			var obj = eval(e);
-			console.log(obj.message);
+			log(obj.message);
+			loadUserMesg();
 		}
 	});
 	for(var i = 0;i<data1.length;i++){
@@ -109,7 +111,7 @@ function newgame() {
 		}
 	}
 	circle();
-	console.log("finish init")
+	log("finish init")
 }
 
 function circle(){
@@ -135,7 +137,7 @@ function onPlay(e) {
 		return;
 	}
 	play(x, y, now);
-	console.log(y+","+x)
+	log(y+","+x)
 	playToNetWork(x, y, now);
 	now = com;
 	getNext();
@@ -198,13 +200,16 @@ function next(data,type,deep){
 		async:true,
 		success:function(e){
 			var resultView = eval(e);
-			//console.log(resultView.code+"："+resultView.x+","+resultView.y);
+			//log(resultView.code+"："+resultView.x+","+resultView.y);
 			if(resultView.code==200){
-				console.log("load the next:"+resultView.x+","+resultView.y);
+				log("load the next:"+resultView.x+","+resultView.y);
 				play(resultView.x,resultView.y,now);
 				now=-now;
 			}
 		}
 	});
 	
+}
+function log(msg){
+	$("#time p").text(msg);
 }

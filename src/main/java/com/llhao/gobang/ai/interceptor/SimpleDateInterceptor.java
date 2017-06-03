@@ -10,6 +10,6 @@ public class SimpleDateInterceptor implements Interceptor {
     @Override
     public boolean intercept(ResultNode node, int i, int j) {
         Chess chess = node.getChess();
-        return chess.get(j, i) == 0;
+        return chess.get(i, j) == 0;
     }
 }

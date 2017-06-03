@@ -18,4 +18,22 @@
         INSERT INTO user(id,name,password,email,image,win,lose,tie,time) VALUES
         (NULL , #{name},#{password},#{email},#{image},#{win},#{lose},#{tie},#{time});
     </insert>
+    <update id="updateUser" parameterType="UpdateUserJO"  >
+        UPDATE USER SET
+        <choose>
+            <when test="type==1">
+                WIN = WIN+1
+            </when>
+            <when test="type==0">
+                TIE=TIE+1
+            </when>
+            <when test="type==-1">
+                LOSE = LOSE+1
+            </when>
+            <otherwise>
+                WIN = WIN
+            </otherwise>
+        </choose>
+        WHERE id=#{userId}
+    </update>
 </mapper>

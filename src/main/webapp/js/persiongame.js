@@ -11,6 +11,7 @@ var com = -1;
 var now = -1;
 var step = 0;
 var status = 3;//1队列中，2游戏中，3无状态
+var nextInter;
 function init(id) {
 	can = document.getElementById(id);
 	mt = can.offsetTop;
@@ -58,6 +59,7 @@ $(document).ready(main);
 
 function main(){
 	init("screen");
+	loadUserMesg();
 }
 
 
@@ -93,8 +95,13 @@ function loadGameStatus(){
 				now = 1;
 				$("#game-btn").text(me==1?"先手执黑":"后手执白");
 				console.log(view.message);
-				setInterval(next,500);
+				nextInter = setInterval(next,500);
 				step = 0;
+				data = new Array();
+				for(var i = 0; i < 15; i++) {
+					data[i] = new Array();
+				}
+				loadUserMesg();
 			}else{
 				setTimeout(loadGameStatus,500);
 			}
@@ -185,6 +192,10 @@ function line(sx, sy, ex, ey) {
 	ctx.closePath();
 }
 
+function endGame(){
+	clearInterval(nextInter);
+}
+
 function next(){
 	var result = $.ajax({
 		type:"get",
@@ -201,6 +212,7 @@ function next(){
 			if(resultView.win!=0){
 				alert(resultView.win==1?"黑方胜":"白方胜");
 				console.log(resultView.message)
+				endGame();
 			}
 		}
 	});

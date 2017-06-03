@@ -1,8 +1,11 @@
 com\llhao\gobang\ai\AI.class
 com\llhao\gobang\service\impl\GameServiceImpl.class
+com\llhao\gobang\service\IRecordService.class
 com\llhao\gobang\entity\User.class
 com\llhao\gobang\utils\FileCodeUtiles.class
+com\llhao\gobang\test\Test2.class
 com\llhao\gobang\web\interceptor\EnvironmentInterceptor.class
+com\llhao\gobang\ai\eval\FeatureUtils.class
 com\llhao\gobang\chess\DynamicChess.class
 com\llhao\gobang\dao\IUserDao.class
 com\llhao\gobang\service\IAiService.class
@@ -10,6 +13,7 @@ com\llhao\gobang\test\DebugFrame$3.class
 com\llhao\gobang\service\impl\AiServiceImpl.class
 com\llhao\gobang\web\controller\UserController.class
 com\llhao\gobang\test\Test.class
+com\llhao\gobang\entity\Record.class
 com\llhao\gobang\service\IUserService.class
 com\llhao\gobang\service\po\Game$1.class
 com\llhao\gobang\web\vo\BasicView.class
@@ -18,6 +22,7 @@ com\llhao\gobang\web\controller\AIController.class
 com\llhao\gobang\ai\eval\DynamicEvaluation.class
 com\llhao\gobang\web\vo\ChessResultView.class
 com\llhao\gobang\ai\eval\MatrixEvaluation.class
+com\llhao\gobang\service\impl\RecordServiceImpl.class
 com\llhao\gobang\ai\interceptor\AlphaInterceptor.class
 com\llhao\gobang\ai\record\Record.class
 com\llhao\gobang\ai\eval\util\FeatureUtils.class
@@ -53,8 +58,11 @@ com\llhao\gobang\ai\eval\Evaluation.class
 com\llhao\gobang\ai\sort\ThreatSorter.class
 com\llhao\gobang\web\vo\AIResultView.class
 com\llhao\gobang\ai\record\ZobristRecord.class
+com\llhao\gobang\dao\IRecordDao.class
 com\llhao\gobang\ai\interceptor\PositionInterceptor.class
+com\llhao\gobang\dao\jo\UpdateUserJO.class
 com\llhao\gobang\ai\MinmaxAI.class
 com\llhao\gobang\web\vo\NewGameView.class
 com\llhao\gobang\ai\sort\SimpleMatrixSorter.class
 com\llhao\gobang\service\impl\UserServiceImpl.class
+com\llhao\gobang\web\vo\UserInfoView.class

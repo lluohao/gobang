@@ -6,7 +6,6 @@ import com.llhao.gobang.ai.eval.DynamicEvaluation;
 import com.llhao.gobang.chess.ChessNode;
 import com.llhao.gobang.chess.DynamicChess;
 import com.llhao.gobang.entity.User;
-import com.llhao.gobang.utils.Matrixs;
 
 import java.sql.Timestamp;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +25,7 @@ public class Game {
     private ExecutorService threadPool = Executors.newCachedThreadPool();
     private static DynamicEvaluation evaluation = new DynamicEvaluation();
     private static MinmaxAI ai = new MinmaxAI();
+    private boolean save = false;
 
     public void init(){
         if(getUser(now).getId()<0){
@@ -33,7 +33,15 @@ public class Game {
         }
     }
 
-    public boolean play(int x,int y,int type){
+    public boolean isSave() {
+        return save;
+    }
+
+    public void setSave(boolean save) {
+        this.save = save;
+    }
+
+    public boolean play(int x, int y, int type){
         if(win!=0){
             throw new RuntimeException("游戏已经结束,"+(win==1?"黑色方":"白色方")+"胜");
         }
@@ -50,6 +58,17 @@ public class Game {
         }
     }
 
+    public String getDate(){
+        StringBuilder builder = new StringBuilder();
+        int[][] data = chess.getSquare();
+        for (int[] datum : data) {
+            for (int i : datum) {
+                builder.append(i==1?"B":i==-1?"W":"0");
+            }
+        }
+        return builder.toString();
+    }
+
     private void checkWin(){
         win = evaluation.win(chess);
     }
@@ -63,7 +82,8 @@ public class Game {
                 ResultNode result = ai.next(chess,now,deep);
                 chess.play(result.getX(),result.getY(),now);
                 System.out.println("COMPLAY"+deep+":"+result.getX()+","+result.getY());
-                Matrixs.print(chess.getSquare());
+                //Matrixs.print(chess.getSquare());
+                Game.this.setWin(evaluation.win(chess));
                 now = -now;
             }
         });

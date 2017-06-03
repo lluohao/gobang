@@ -1,17 +1,22 @@
 #main{
-    width: 1200px;
+    width: 1000px;
     margin: auto;
     text-align: center;
     margin-top: 20px;
+    overflow: hidden;
 }
 #screen{
 	display: inline-block;
 }
+#chess{
+	width: 700px;
+	float: left;
+}
 #menu{
 	width: 300px;
-	background-color:#19931F;
+	background-color:#D4D4D4;
 	height: 700px;
-	display: inline-block;
+	float: left;
 }
 #menu-bottom{
 	padding: 10px;
@@ -20,4 +25,43 @@
 select{
 	height: 35px;
 	width: 200px;
+}
+.user-div{
+	text-align: left;
+	background: #2da9bd;
+}
+.user-img{
+	display: inline-block;
+	margin: 10px 20px;
+}
+.user-img img{
+	border-radius: 30px;
+}
+.user-name{
+	display: inline-block;
+	position: relative;
+	top: -20px;
+}
+.user-name p{
+	margin: 0px;
+}
+.user-msg{
+	width: 100%;
+	background: #307DA7;
+	color: #FFF;
+}
+#user-ot{
+	
+}
+#user-me{
+	posi
+}
+#time{
+	height: 90px;
+}
+#time p{
+	margin: 0px;
+	height: 90px;
+	line-height: 90px;
+	font-size: 20px;
 }

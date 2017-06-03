@@ -27,7 +27,7 @@ public class Chess {
         }
     }
 
-    public boolean play(int x, int y, int type) {
+    public synchronized boolean play(int x, int y, int type) {
         resetHashCode(x,y,type);
         square[y][x] = type;
         if(type==0){

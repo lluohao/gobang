@@ -16,7 +16,7 @@ public class DynamicEvaluation extends MatrixEvaluation {
     public void setAttack(boolean attack) {
         this.attack = attack;
     }
-    public static final int[] SHAP_SCORE = {50000, 4320, 720, 720, 720, 720, 720, 720, 720, 720, 720, 120, 120, 120, 20, 20};
+    public static final int[] SHAP_SCORE = {50000, 4320, 720, 720, 700, 700, 720, 720, 700, 700, 700, 100, 100, 120, 20, 20};
     public static final int[][] TYPE_BLACK = {
             {1, 1, 1, 1, 1}, {0, 1, 1, 1, 1, 0},
             {0, 1, 1, 1, 0, 0}, {0, 0, 1, 1, 1, 0}, {0, 1, 0, 1, 1, 0}, {0, 1, 1, 0, 1, 0},
@@ -35,6 +35,46 @@ public class DynamicEvaluation extends MatrixEvaluation {
         for (int i = 0; i < TYPE_BLACK.length; i++) {
             TYPE_COUNT[i] = Matrixs.count(TYPE_BLACK[i]);
         }
+    }
+    public int shapType(Chess chess,int x,int y,int dx,int dy){
+        for (int i = 0; i < TYPE_BLACK.length; i++) {
+            boolean flag = true;
+            for(int j = 0; j < TYPE_BLACK[i].length;j++){
+                if((x+dx*j)>14||(y+dy*j>14)||(x+dx*j)<0||(y+dy*j<0)){
+                    flag = false;
+                    break;
+                }
+                if(TYPE_BLACK[i][j]!=chess.get(x+dx*j,y+dy*j)){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                if(i==0){
+                    return 100;
+                }
+                return i;
+            }
+            flag = true;
+            for(int j = 0; j < TYPE_WHITE[i].length;j++){
+                if((x+dx*j)>14||(y+dy*j>14)||(x+dx*j)<0||(y+dy*j<0)){
+                    flag = false;
+                    break;
+                }
+                ;
+                if(TYPE_WHITE[i][j]!=chess.get(x+dx*j,y+dy*j)){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                if(i==0){
+                    return -100;
+                }
+                return -i;
+            }
+        }
+        return 0;
     }
 
     public int win(Chess chess) {
@@ -108,71 +148,39 @@ public class DynamicEvaluation extends MatrixEvaluation {
         }
     }
 
-    public int shapType(Chess chess,int x,int y,int dx,int dy){
-        for (int i = 0; i < TYPE_BLACK.length; i++) {
-            boolean flag = true;
-            for(int j = 0; j < TYPE_BLACK[i].length;j++){
-                if((x+dx*j)>14||(y+dy*j>14)||(x+dx*j)<0||(y+dy*j<0)){
-                    flag = false;
-                    break;
-                }
-                if(TYPE_BLACK[i][j]!=chess.get(x+dx*j,y+dy*j)){
-                    flag = false;
-                    break;
-                }
-            }
-            if(flag){
-                if(i==0){
-                    return 100;
-                }
-                return i;
-            }
-            flag = true;
-            for(int j = 0; j < TYPE_WHITE[i].length;j++){
-                if((x+dx*j)>14||(y+dy*j>14)||(x+dx*j)<0||(y+dy*j<0)){
-                    flag = false;
-                    break;
-                }
-                ;
-                if(TYPE_WHITE[i][j]!=chess.get(x+dx*j,y+dy*j)){
-                    flag = false;
-                    break;
-                }
-            }
-            if(flag){
-                if(i==0){
-                    return -100;
-                }
-                return -i;
-            }
-        }
-        return 0;
-    }
+
 
     public static void main(String[] args) {
-        DynamicEvaluation evaluation = new DynamicEvaluation();
-        MatrixEvaluation evaluation1 = new MatrixEvaluation();
-        DynamicChess chess = DynamicChess.fromDate(new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-
-        },evaluation);
-        int score = evaluation.eval(chess,1,1);
-        System.out.println(score);
-        System.out.println(Arrays.toString(chess.getBlackCount()));
-        System.out.println(Arrays.toString(chess.getWhiteCount()));
+        int[] count = new int[6];
+        for (int[] ints : TYPE_BLACK) {
+            for (int i = 0; i < ints.length; i++) {
+                count[i]+=ints[i];
+            }
+        }
+        System.out.println(Arrays.toString(count));
+//        DynamicEvaluation evaluation = new DynamicEvaluation();
+//        MatrixEvaluation evaluation1 = new MatrixEvaluation();
+//        DynamicChess chess = DynamicChess.fromDate(new int[][]{
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//
+//        },evaluation);
+//        int score = evaluation.eval(chess,1,1);
+//        System.out.println(score);
+//        System.out.println(Arrays.toString(chess.getBlackCount()));
+//        System.out.println(Arrays.toString(chess.getWhiteCount()));
     }
 }

@@ -15,5 +15,4 @@ public interface IGameService {
     GameStatusView addToGamePool(User user);
     GameStatusView removeFromGamePool(User user);
     GameStatusView gameStatus(User user);
-
 }

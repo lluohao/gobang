@@ -4,15 +4,18 @@ import com.llhao.gobang.chess.ChessNode;
 import com.llhao.gobang.chess.DynamicChess;
 import com.llhao.gobang.entity.User;
 import com.llhao.gobang.service.IGameService;
+import com.llhao.gobang.service.IRecordService;
 import com.llhao.gobang.service.po.Game;
 import com.llhao.gobang.web.vo.ChessResultView;
 import com.llhao.gobang.web.vo.GameStatusView;
 import com.llhao.gobang.web.vo.PlayChessView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,7 +30,8 @@ public class GameServiceImpl implements IGameService {
     public static List<User> pools = new Vector<>();
     public static Map<User,Game> games = new ConcurrentHashMap<>();
     private Thread thread = new Thread();
-
+    @Autowired
+    private IRecordService recordService;
     public GameServiceImpl(){
         Runnable run = new Runnable() {
             @Override
@@ -58,6 +62,13 @@ public class GameServiceImpl implements IGameService {
             }
 
             public void handleGames(){
+                Set<User> users = games.keySet();
+                for (User user : users) {
+                    Game game = games.get(user);
+                    if(game.getWin()!=0){
+
+                    }
+                }
                 //取出所有Game,判断是否结束
                 //如果结束，保存游戏，将用户状态重置为仅登录
                 //再判断是否长时间未连接，如果是，则认定最后一个连接的人胜
@@ -72,19 +83,34 @@ public class GameServiceImpl implements IGameService {
         if(game==null){
             view.setCode(500);
             view.setMessage("没有在游戏中");
+            return view;
+        }
+        if(game.isSave()){
+            view.setCode(415);
+            view.setMessage("游戏已经结束");
+            return view;
         }
         try {
             ChessNode result = game.getStep(index);
             view.setCode(200);
             view.setX(result.getX());
             view.setY(result.getY());
-            if(game.getWin()!=0){
-                view.setMessage(game.getWin()==1?"黑方胜":"白方胜");
-                view.setWin(game.getWin());
-            }
         }catch (Exception e){
             view.setCode(500);
             view.setMessage(e.getMessage());
+        }
+        if(game.getWin()!=0){
+            view.setMessage(game.getWin()==1?"黑方胜":"白方胜");
+            view.setWin(game.getWin());
+            synchronized (game){
+                games.remove(game.getBlack());
+                games.remove(game.getWhite());
+                try {
+                    recordService.save(game);
+                }catch (Exception e){
+                    return view;
+                }
+            }
         }
         return view;
     }
@@ -149,5 +175,13 @@ public class GameServiceImpl implements IGameService {
         view.setStatus(STATUS_NONE);
         view.setMessage("just login in");
         return view;
+    }
+
+    public IRecordService getRecordService() {
+        return recordService;
+    }
+
+    public void setRecordService(IRecordService recordService) {
+        this.recordService = recordService;
     }
 }

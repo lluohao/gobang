@@ -11,6 +11,7 @@ import com.llhao.gobang.utils.Matrixs;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by llhao on 2017/4/23.
@@ -25,15 +26,14 @@ public class Test {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1, -1, 1, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         },evaluation);
         MinmaxAI ai = new MinmaxAI();
         evaluation.setAttack(false);
@@ -41,12 +41,15 @@ public class Test {
 //        next = ai.next(chess,1,4);
 //        System.out.println(next);
        // debug(next);
-        for (int i = 0; i < 10; i++) {
+        Scanner in = new Scanner(System.in);
+        for (int i = 0; i < 100; i++) {
             ZobristRecord.count=0;
             long start = System.currentTimeMillis();
             next = null;
             if(i%2==0){
                 next = ai.next(chess, -1, 4);
+                //next.setX(in.nextInt());
+                //next.setY(in.nextInt());
                 chess.play(next.getX(), next.getY(), -1);
                 System.out.println("本次搜索用时："+(System.currentTimeMillis()-start)+"毫秒"+",搜索結點數："+ ResultNodeUtils.countChildren(next.getParent())+",置换表加速："+ZobristRecord.count);
                 ResultNode temp = next;
@@ -56,8 +59,11 @@ public class Test {
                 System.out.println(temp);
             }else{
                 next = ai.next(chess, 1, 4);
+                //next = new ResultNode();
+//                next.setX(in.nextInt());
+//                next.setY(in.nextInt());
                 chess.play(next.getX(), next.getY(), 1);
-                System.out.println(next.getX() + "," + next.getY() + "," + next.getScore()+",搜索节点数："+ ResultNodeUtils.countChildren(next.getParent()));
+                //System.out.println(next.getX() + "," + next.getY() + "," + next.getScore()+",搜索节点数："+ ResultNodeUtils.countChildren(next.getParent()));
             }
             ResultNode temp = next;
             while (temp.getNext()!=null){

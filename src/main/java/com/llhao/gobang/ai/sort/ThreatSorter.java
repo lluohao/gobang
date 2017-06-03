@@ -31,7 +31,7 @@ public class ThreatSorter implements Sorter {
             for (Point point : all) {
                 Integer old = maps.get(point);
                 if(old==null){
-                    maps.put(point,point.getValue());
+                    maps.put(point,point.getValue()*100);
                 }else {
                     point.setValue(old+point.getValue()*100);
                     maps.put(point,point.getValue());

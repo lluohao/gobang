@@ -1,13 +1,13 @@
 package com.llhao.gobang.web.controller;
 
 import com.llhao.gobang.ai.eval.DynamicEvaluation;
-import com.llhao.gobang.chess.ChessNode;
 import com.llhao.gobang.chess.DynamicChess;
 import com.llhao.gobang.entity.User;
 import com.llhao.gobang.service.IGameService;
 import com.llhao.gobang.service.IUserService;
 import com.llhao.gobang.service.impl.GameServiceImpl;
 import com.llhao.gobang.service.po.Game;
+import com.llhao.gobang.web.vo.BasicView;
 import com.llhao.gobang.web.vo.ChessResultView;
 import com.llhao.gobang.web.vo.GameStatusView;
 import com.llhao.gobang.web.vo.NewGameView;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * Created by luohao on 2017/5/19.
@@ -37,15 +36,7 @@ public class GameConrtoller {
     @RequestMapping("/step")
     public @ResponseBody ChessResultView step(@RequestParam int step, HttpSession session){
         Game game = (Game) session.getAttribute("game");
-        //System.out.println(game+","+step);
         ChessResultView view = gameService.step(game,step-1);
-        if(view.getCode()==200) {
-            List<ChessNode> nodeList = game.getChess().getNodes();
-            for (ChessNode chessNode : nodeList) {
-                System.out.println(chessNode);
-            }
-            System.out.println(view);
-        }
         return view;
     }
 
@@ -90,6 +81,11 @@ public class GameConrtoller {
     @RequestMapping("/newGame")
     public @ResponseBody GameStatusView newGame(HttpSession session){
         return gameService.addToGamePool((User) session.getAttribute("user"));
+    }
+
+    public @ResponseBody BasicView endGame(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        return null;
     }
 
     @RequestMapping("/newComputer")

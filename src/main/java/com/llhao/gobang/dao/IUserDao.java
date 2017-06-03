@@ -1,5 +1,6 @@
 package com.llhao.gobang.dao;
 
+import com.llhao.gobang.dao.jo.UpdateUserJO;
 import com.llhao.gobang.entity.User;
 
 /**
@@ -13,4 +14,6 @@ public interface IUserDao {
     User findUserByEmail(String email);
 
     int addUser(User user);
+
+    int updateUser(UpdateUserJO jo);
 }
